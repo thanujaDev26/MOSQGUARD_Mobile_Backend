@@ -1,34 +1,16 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const ComplainRoute = require("./routes/ComplainRoute");
+
+dotenv.config();
+
 const app = express();
-const port = process.env.PORT || 3000;
+app.use(express.json());
+app.use(cors());
 
-require('dotenv').config();
-console.log("Private Key:", process.env.FIREBASE_PRIVATE_KEY ? "Loaded" : "Not Loaded");
-const admin = require('firebase-admin');
+// Routes
+app.use("/api", ComplainRoute);
 
-const privateKey = process.env.FIREBASE_PRIVATE_KEY 
-  ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n') 
-  : null;
-
-if (!privateKey) {
-    console.error("❌ ERROR: FIREBASE_PRIVATE_KEY is not defined in .env file");
-    process.exit(1);
-}
-
-// Initialize Firebase Admin SDK
-admin.initializeApp({
-  credential: admin.credential.cert({
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    privateKey: privateKey,
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-  }),
-  databaseURL: process.env.DATABASE_URL,
-});
-
-app.get('/', (req, res) => {
-  res.send('Node.js with Firebase and .env is working! 🚀');
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
