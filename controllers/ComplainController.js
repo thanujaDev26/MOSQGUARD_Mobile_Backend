@@ -24,23 +24,3 @@ exports.createComplain = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-// Get all Complaints
-// exports.getComplains = async (req, res) => {
-//   try {
-//     const complainsRef = db.collection("complains");
-//     const snapshot = await complainsRef.get();
-
-//     if (snapshot.empty) {
-//       return res.status(404).json({ message: "No complaints found" });
-//     }
-
-//     const complains = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-//     res.status(200).json(complains);
-
-//   } catch (error) {
-//     console.error("Error fetching complaints:", error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// };
