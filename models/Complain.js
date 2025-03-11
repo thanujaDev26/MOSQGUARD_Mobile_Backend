@@ -1,11 +1,9 @@
-const db = require("../config/db");
+import db from "../config/db.js";
 
-class Complain {
+export default class Complain {
   static async create(name, subject, message) {
     const query = `INSERT INTO complains (name, subject, message) VALUES (?, ?, ?)`;
     const [result] = await db.query(query, [name, subject, message]);
     return result.insertId;
   }
 }
-
-module.exports = Complain;

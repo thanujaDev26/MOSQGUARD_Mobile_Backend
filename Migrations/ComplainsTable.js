@@ -1,4 +1,4 @@
-const db = require("../config/db"); // Import the database connection
+import db from "../config/db.js"; // Import the database connection
 
 const createTableQuery = `
 CREATE TABLE IF NOT EXISTS complains (
