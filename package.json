@@ -16,6 +16,7 @@
   "bugs": {
     "url": "https://github.com/ksdkaveesha/MOSQGUARD_Mobile_Backend/issues"
   },
+  "type": "module",
   "homepage": "https://github.com/ksdkaveesha/MOSQGUARD_Mobile_Backend#readme",
   "dependencies": {
     "body-parser": "^1.20.3",

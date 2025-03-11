@@ -1,14 +1,14 @@
-const Complain = require("../models/Complain");
+import Complain from "../models/Complain.js"; // Ensure the file uses ES modules
 
 // Create a Complaint
-exports.createComplain = async (req, res) => {
+export const createComplain = async (req, res) => {
   try {
     const { name, subject, message } = req.body;
 
     if (!name || !subject || !message) {
       return res.status(400).json({ error: "All fields are required" });
     }
-    
+
     const id = await Complain.create(name, subject, message);
     res.status(201).json({
       message: "Complaint submitted successfully",

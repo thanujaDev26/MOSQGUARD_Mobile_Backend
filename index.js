@@ -1,8 +1,8 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const db = require("./config/db");
-const ComplainRoute = require("./routes/ComplainRoute");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import db from "./config/db.js"; // Ensure db.js also uses ES modules
+import ComplainRoute from "./routes/Routes.js"; // Add .js to file imports
 
 dotenv.config();
 
