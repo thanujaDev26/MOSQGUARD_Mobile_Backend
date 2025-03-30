@@ -1,12 +1,18 @@
-import MonthlyReport from "../models/MonthlyReport.js";
+import MonthlyReportService from "../services/MonthlyReportService.js";
 
-export const getCount = async (req, res) => {
+/**
+ * Controller to get total and past 24-hour report counts.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
+export const getReportCounts = async (req, res) => {
     try {
-        const count = await MonthlyReport.getCount() + 50;
-        const past_24_count = await MonthlyReport.get_24_past_Count();
-        res.status(200).json({ count, past_24_count });
+        const totalCount = await MonthlyReportService.fetchTotalCount();
+        const past24HourCount = await MonthlyReportService.fetchPast24HourCount();
+
+        res.status(200).json({ count: totalCount, past_24_count: past24HourCount });
     } catch (error) {
-        console.error("Error getting complaint count:", error);
-        res.status(500).json({ message: error.message });
+        console.error("❌ Error fetching report counts:", error);
+        res.status(500).json({ message: "Internal Server Error" });
     }
-}
+};

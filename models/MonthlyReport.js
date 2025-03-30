@@ -1,15 +1,19 @@
-import db from "../config/db.js";
+import { DataTypes } from "sequelize";
+import sequelize from "../config/db.js";
 
-export default class MonthlyReport {
-    static async getCount() {
-        const query = 'SELECT COUNT(*) as count FROM communicable_disease_report';
-        const [result] = await db.query(query);
-        return result[0].count;        
-    }
+const MonthlyReport = sequelize.define("MonthlyReport", {
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
+    disease: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+}, {
+    tableName: "communicable_disease_report", // Ensure it matches your DB table
+    timestamps: true, // If your table does not have updatedAt
+});
 
-    static async get_24_past_Count() {
-        const query = 'SELECT COUNT(*) as count FROM communicable_disease_report WHERE createdAt >= NOW() - INTERVAL 24 HOUR';
-        const [results] = await db.query(query);
-        return results.count;
-    }
-}
+export default MonthlyReport;
