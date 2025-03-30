@@ -1,9 +1,27 @@
-import db from "../config/db.js";
+import { DataTypes } from "sequelize";
+import sequelize from "../config/db.js"; // Import configured Sequelize instance
 
-export default class Complain {
-  static async create(name, subject, message) {
-    const query = `INSERT INTO complains (name, subject, message) VALUES (?, ?, ?)`;
-    const [result] = await db.query(query, [name, subject, message]);
-    return result.insertId;
-  }
-}
+const Complain = sequelize.define("Complain", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  subject: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  message: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+}, {
+  tableName: "complains", // Ensure table name is explicitly set
+  timestamps: true, // Enable automatic timestamps (Sequelize adds `createdAt` & `updatedAt` by default)
+});
+
+export default Complain;
