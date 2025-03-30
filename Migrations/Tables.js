@@ -1,5 +1,6 @@
 import sequelize from "../config/db.js"; // Import Sequelize instance
 import Complain from "../models/Complain.js"; // Import model
+import News from "../models/News.js"; // Import model
 
 async function migrate() {
   try {
