@@ -1,9 +1,8 @@
-const admin = require("firebase-admin");
-const dotenv = require("dotenv");
+import admin from "firebase-admin";
+import fs from "fs";
 
-dotenv.config();
-
-const serviceAccount = require("../serviceAccountKey.json");
+// Read the JSON file manually
+const serviceAccount = JSON.parse(fs.readFileSync("./serviceAccountKey.json", "utf8"));
 
 if (!serviceAccount) {
   console.error("Firebase serviceAccountKey.json is missing.");
@@ -12,9 +11,7 @@ if (!serviceAccount) {
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: process.env.FIREBASE_DATABASE_URL, 
+  // databaseURL: process.env.FIREBASE_DATABASE_URL, 
 });
 
-const db = admin.firestore();
-
-module.exports = db;
+export default admin;
