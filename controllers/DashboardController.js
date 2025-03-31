@@ -1,4 +1,4 @@
-import MonthlyReportService from "../services/MonthlyReportService.js";
+import MonthlyReportService from "../services/DashboardService.js";
 
 /**
  * Controller to get total and past 24-hour report counts.
