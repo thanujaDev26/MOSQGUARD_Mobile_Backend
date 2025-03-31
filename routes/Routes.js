@@ -1,6 +1,6 @@
 import express from "express";
 import { createComplain } from "../controllers/ComplainController.js";
-import { getReportCounts  } from "../controllers/MonthlyReportController.js";
+import { getReportCounts  } from "../controllers/DashboardController.js";
 import { getNews } from "../controllers/NewsController.js";
 import { notifyUser, fetchNotifications } from "../controllers/NotificationController.js";
 

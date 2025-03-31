@@ -1,9 +1,9 @@
-import MonthlyReport from "../models/MonthlyReport.js";
+import MonthlyReport from "../models/Dashboard.js";
 
 /**
  * MonthlyReportService - Handles business logic for reports.
  */
-export default class MonthlyReportService {
+export default class DashboardService {
     /**
      * Fetch the total report count.
      * @returns {Promise<number>}
