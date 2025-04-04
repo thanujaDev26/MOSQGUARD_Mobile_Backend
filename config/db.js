@@ -1,11 +1,9 @@
-import dotenv from "dotenv"; // Load .env file
-import mysql from "mysql2/promise";
-import { Sequelize } from "sequelize"; // Import Sequelize
+import dotenv from "dotenv";
+import { Sequelize } from "sequelize";
 
 dotenv.config();
 
-// Create Sequelize instance
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSW, {
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
   host: "localhost",
   dialect: "mysql",
   logging: false, // Set to true if you want to see SQL queries in the console
@@ -21,7 +19,7 @@ async function testConnection() {
 }
 
 testConnection();
-// export default db;
+
 
 export default sequelize;
 
