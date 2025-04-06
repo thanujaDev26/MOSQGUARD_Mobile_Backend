@@ -23,7 +23,7 @@ const Complain = sequelize.define(
     },
   },
   {
-    timestamps: true, // Automatically creates `createdAt` and `updatedAt`
+    timestamps: true, 
   }
 );
 
