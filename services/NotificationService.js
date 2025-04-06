@@ -1,5 +1,5 @@
 import Notification from "../models/Notifications.js";
-import admin from "../config/firebase.js"; // Assuming you have a firebase config file
+import admin from "../config/firebase.js"; 
 
 export async function sendNotification(userId, message, type) {
   try {
