@@ -1,5 +1,5 @@
 import express from "express";
-import { createComplain } from "../controllers/ComplainController.js";
+import { createComplain,fetchComplaints } from "../controllers/ComplainController.js";
 import { getReportCounts  } from "../controllers/DashboardController.js";
 import { getNews } from "../controllers/NewsController.js";
 import { notifyUser, fetchNotifications } from "../controllers/NotificationController.js";
@@ -8,8 +8,9 @@ import { pushNotifications } from "../controllers/PushNotificationController.js"
 
 const router = express.Router();
 
-router.post("/complain", createComplain); 
-router.get("/monthlyreport", getReportCounts ); 
+router.post("/complain", createComplain);
+router.get("/complain", fetchComplaints);
+router.get("/monthly-report", getReportCounts );
 router.get("/news", getNews ); 
 router.post("/notification_send", notifyUser); 
 router.get("/notification/:userId", fetchNotifications); 
