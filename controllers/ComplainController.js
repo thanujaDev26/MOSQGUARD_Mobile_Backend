@@ -1,10 +1,11 @@
 import Complain  from "../models/Complain.js";
 
+//Complaints by public community
 export const createComplain = async (req, res) => {
   try {
     const fullComplaint = req.body;
-    if (!fullComplaint.name || !fullComplaint.title || !fullComplaint.message) {
-      return res.status(400).json({ error: "Complaint name , Title and message are required"});
+    if (!fullComplaint.type || !fullComplaint.complain || !fullComplaint.mobileNumber) {
+      return res.status(400).json({ error: "Type, Complain and Mobile Number are required"});
     }
     let response = await Complain.create(fullComplaint);
     res.status(201).json({
@@ -19,6 +20,7 @@ export const createComplain = async (req, res) => {
   }
 };
 
+//status eka widiyta ynne meka
 export const fetchComplaints = async (req, res) => {
   try{
     const complaints = await Complain.findAll({

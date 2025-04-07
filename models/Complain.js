@@ -1,27 +1,33 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
+
+//complaints
 const Complain = sequelize.define(
     "Complain",
     {
-        id: {
+        complaintId: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        name: {
+        fName: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        title: {
+        lName: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        message: {
+        NIC: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        mobileNumber: {
             type: DataTypes.TEXT,
             allowNull: false,
         },
-        place:{
+        location: {
             type: DataTypes.TEXT,
             allowNull: false,
         },
@@ -29,6 +35,19 @@ const Complain = sequelize.define(
             type: DataTypes.JSON,
             allowNull: true,
             defaultValue: [],
+        },
+        type:{
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+        complain: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+        complaintTime: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
         },
     },
     {
