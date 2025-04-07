@@ -14,8 +14,9 @@ app.use("/api", ComplainRoute);
 
 
 sequelize.sync({ alter: true }) 
-  .then(() => console.log("✅ Tables synchronized"))
-  .catch((error) => console.error("❌ Error synchronizing tables:", error));
+  .then(() => console.log("Tables synchronized"))
+  .catch((error) => console.error("Error synchronizing tables:", error));
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

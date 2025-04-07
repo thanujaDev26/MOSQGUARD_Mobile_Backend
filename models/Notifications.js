@@ -1,22 +1,20 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
+
+//SNS from firebase
 const Notification = sequelize.define("Notification", {
-  id: {
+  notificationId: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  user_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  message: {
+  title: {   //New Dengue Hotspot alert, Issue Resolved, Heavy Rain expected
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  type: {
-    type: DataTypes.STRING,
+  description: {
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   status: {
