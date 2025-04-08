@@ -20,7 +20,7 @@ const Complain = sequelize.define(
             allowNull: false,
         },
         NIC: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
         },
         mobileNumber: {
