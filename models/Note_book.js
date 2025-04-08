@@ -4,25 +4,37 @@ await sequelize.sync({ alter: false, force: false });
 
 import sequelize from "../config/db.js";
 
-const Message = sequelize.define("Message", {
+const NoteBook = sequelize.define("NoteBook", {
   id: {
     type: DataTypes.BIGINT,
     autoIncrement: true,
     primaryKey: true,
   },
-  status: {
-    type: DataTypes.ENUM("SENT", "PENDING", "COMPLETED"),
-    allowNull: false,
+  house_condition: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
   },
-  moh_officer_id: {
-    type: DataTypes.BIGINT,
-    allowNull: false,
-    references: {
-      model: "mohofficer", 
-      key: "id"
-    },
+  distance: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
   },
-  phi_officer_id: {
+  isolation: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
+  },
+  remarks: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
+  },
+  subject: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
+  },
+  termination: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
+  },
+  phi_id: {
     type: DataTypes.BIGINT,
     allowNull: false,
     references: {
@@ -37,15 +49,7 @@ const Message = sequelize.define("Message", {
       model: "communicable_disease_notification", 
       key: "id"
     },
-  },
-  h411_id: {
-    type: DataTypes.BIGINT,
-    allowNull: false,
-    references: {
-      model: "h411", 
-      key: "id"
-    },
-  },
+  },  
   created_at: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
@@ -55,9 +59,9 @@ const Message = sequelize.define("Message", {
     defaultValue: DataTypes.NOW,
   },
 }, {
-  tableName: "message",
+  tableName: "note_book",
   freezeTableName: true,
   timestamps: false, // Disable Sequelize's auto timestamps
 });
 
-export default Message;
+export default NoteBook;

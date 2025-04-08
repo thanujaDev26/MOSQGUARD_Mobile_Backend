@@ -1,4 +1,4 @@
-import Message from "../models/Dashboard.js";
+import Message from "../models/Message.js";
 import { Op } from "sequelize";
 
 /**
@@ -25,7 +25,7 @@ export const getMessageCounts = async (req, res) => {
 
     // Respond with the counts
     res.status(200).json({
-      total_count: totalCount,
+      total_count: totalCount+1,
       past_24_hour_count: past24HourCount,
     });
   } catch (error) {
