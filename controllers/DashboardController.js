@@ -6,6 +6,7 @@ import { Op } from "sequelize";
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
  */
+
 export const getMessageCounts = async (req, res) => {
   try {
     // Get total count of all messages
