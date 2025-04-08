@@ -33,23 +33,31 @@ export const createComplain = async (req, res) => {
 
 //status eka widiyta ynne meka
 export const fetchComplaints = async (req, res) => {
-  try{
+  try {
     const complaints = await Complain.findAll({
       limit: 50,
       offset: 0,
       order: [['createdAt', 'DESC']],
-      attributes: { exclude: ['images'] }
     });
+
+    const formattedComplaints = complaints.map((complaint) => ({
+      location: complaint.location,
+      complaintTime: complaint.complaintTime,
+      status: complaint.status || "pending",
+      imageUrl: complaint.images && complaint.images.length > 0
+          ? complaint.images[0]
+          : "",
+    }));
     res.status(200).json({
-      status : "Success",
-      data : {
-        complaints
-      }
+      status: "Success",
+      data: {
+        complaints: formattedComplaints,
+      },
     });
-  }
-  catch(error){
+  } catch (error) {
     console.error("Error fetching complaints:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-}
+};
+
 
