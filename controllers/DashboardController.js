@@ -1,4 +1,4 @@
-import Message from "../models/Dashboard.js";
+import Message from "../models/Message.js";
 import { Op } from "sequelize";
 
 /**
