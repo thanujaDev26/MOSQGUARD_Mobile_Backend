@@ -1,5 +1,6 @@
 import Complain  from "../models/Complain.js";
 
+
 //Complaints by public community
 export const createComplain = async (req, res) => {
   try {
@@ -20,11 +21,15 @@ export const createComplain = async (req, res) => {
   }
 };
 
+
 //status eka widiyta ynne meka
 export const fetchComplaints = async (req, res) => {
   try{
     const complaints = await Complain.findAll({
+      limit: 50,
+      offset: 0,
       order: [['createdAt', 'DESC']],
+      attributes: { exclude: ['images'] }
     });
     res.status(200).json({
       status : "Success",
