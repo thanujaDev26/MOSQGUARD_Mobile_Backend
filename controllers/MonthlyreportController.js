@@ -1,15 +1,15 @@
 import Message from '../models/Message.js';
-import NoteBook from '../models/Note_book.js'; // Assuming you have a NoteBook model defined similarly
+import NoteBook from '../models/Note_book.js';
 import { Op } from 'sequelize';
 
 export const getMonthlyReport = async (req, res) => {
   try {
+    const districtName = req.query.district;
+
     // Total cases from Message table
-    const totalCases = await Message.count(
-      {
+    const totalCases = await Message.count({
       where: { district: districtName },
-      }
-    );
+    });
 
     // Total investigations (status = SENT or COMPLETED)
     const totalInvestigations = await Message.count({
@@ -21,29 +21,34 @@ export const getMonthlyReport = async (req, res) => {
       },
     });
 
-    // Get all related message IDs from selected district
-    const relatedMessageIds = await Message.findAll({
-      attributes: ['id'],
-      where: { district: districtName },
+    // Get all h544_ids from Message table in selected district
+    const relatedMessages = await Message.findAll({
+      attributes: ['h544_id'],
+      where: {
+        district: districtName,
+        h544_id: {
+          [Op.ne]: null, // Ensure h544_id is not null
+        },
+      },
     });
 
-    const messageIds = relatedMessageIds.map((msg) => msg.id);
+    const h544Ids = relatedMessages.map(msg => msg.h544_id);
 
-    // Deaths from NoteBook table (linked to messages from the selected district)
+    // Count deaths using h544_id
     const totalDeaths = await NoteBook.count({
       where: {
-        message_id: {
-          [Op.in]: messageIds,
+        h544_id: {
+          [Op.in]: h544Ids,
         },
         isolation: 'death',
       },
     });
 
-    // Recoveries
+    // Count recoveries using h544_id
     const totalRecoveries = await NoteBook.count({
       where: {
-        message_id: {
-          [Op.in]: messageIds,
+        h544_id: {
+          [Op.in]: h544Ids,
         },
         isolation: 'recovery',
       },
@@ -58,6 +63,6 @@ export const getMonthlyReport = async (req, res) => {
     });
   } catch (error) {
     console.error('Error generating monthly report:', error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };
