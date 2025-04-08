@@ -1,5 +1,5 @@
 import Message from "../models/Message.js";
-import { Op } from "sequelize";
+import { INTEGER, Op } from "sequelize";
 
 /**
  * Get total message count and past 24-hour message count.
@@ -26,7 +26,7 @@ export const getMessageCounts = async (req, res) => {
 
     // Respond with the counts
     res.status(200).json({
-      total_count: totalCount+1,
+      total_count: totalCount,
       past_24_hour_count: past24HourCount,
     });
   } catch (error) {
