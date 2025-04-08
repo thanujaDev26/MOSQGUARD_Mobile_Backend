@@ -8,7 +8,6 @@ const s3 = new AWS.S3({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     region: process.env.AWS_REGION,
 });
-
 export const uploadToS3 = async (fileBuffer, fileName) => {
     const params = {
         Bucket: process.env.AWS_S3_BUCKET_NAME,
@@ -16,7 +15,6 @@ export const uploadToS3 = async (fileBuffer, fileName) => {
         Body: fileBuffer,
         ContentType: "image/jpeg",
     };
-
     try {
         const uploadResponse = await s3.upload(params).promise();
         return uploadResponse.Location;

@@ -33,8 +33,7 @@ const Complain = sequelize.define(
         },
         images: {
             type: DataTypes.JSON,
-            allowNull: true,
-            defaultValue: [],
+            allowNull: false,
         },
         type:{
             type: DataTypes.TEXT,
@@ -43,6 +42,11 @@ const Complain = sequelize.define(
         complain: {
             type: DataTypes.TEXT,
             allowNull: false,
+        },
+        status: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "pending",
         },
         complaintTime: {
             type: DataTypes.DATE,
