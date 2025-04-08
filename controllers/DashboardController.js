@@ -17,7 +17,7 @@ export const getMessageCounts = async (req, res) => {
     // Get count of messages created in the past 24 hours
     const past24HourCount = await Message.count({
       where: {
-        createdAt: {
+        created_at: {
           [Op.gte]: oneDayAgo,
         },
       },
