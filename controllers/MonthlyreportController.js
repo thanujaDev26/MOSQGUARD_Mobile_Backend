@@ -33,6 +33,11 @@ export const getMonthlyReport = async (req, res) => {
     });
 
     const h544Ids = relatedMessages.map(msg => msg.h544_id);
+    console.log('Filtered h544Ids (non-null):', h544Ids);  // Debug output
+    console.log('h544Ids:', h544Ids);
+    if (h544Ids.length === 0) {
+      console.log('No h544_ids found for this district.');
+    }
 
     // Count deaths using h544_id
     const totalDeaths = await NoteBook.count({
@@ -53,6 +58,9 @@ export const getMonthlyReport = async (req, res) => {
         isolation: 'recovery',
       },
     });
+    console.log('Total Deaths:', totalDeaths);  // Debugging totalDeaths
+    console.log('Total Recoveries:', totalRecoveries);  // Debugging totalRecoveries
+
 
     res.status(200).json({
       district: districtName,

@@ -47,7 +47,7 @@ const Message = sequelize.define("Message", {
     },
   },
   district: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false,
   },
   created_at: {
