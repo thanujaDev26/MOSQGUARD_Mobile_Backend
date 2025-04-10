@@ -1,21 +1,23 @@
-const express = require('express');
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import ComplainRoute from "./routes/Routes.js";
+import sequelize from "./config/db.js"; 
+
+dotenv.config();
+
 const app = express();
-const port = process.env.PORT || 3000;
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
+app.use(cors());
 
-// Initialize Firebase Admin SDK
-admin.initializeApp({
-  credential: admin.credential.cert({
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-  }),
-  databaseURL: process.env.DATABASE_URL,
-});
+app.use("/api", ComplainRoute);
 
-app.get('/', (req, res) => {
-  res.send('Node.js with Firebase and .env is working! 🚀');
-});
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+sequelize.sync({ alter: true }) 
+  .then(() => console.log("Tables synchronized"))
+  .catch((error) => console.error("Error synchronizing tables:", error));
+
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
